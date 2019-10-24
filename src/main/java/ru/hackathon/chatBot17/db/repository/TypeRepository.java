@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Interface defining a methods of functional interaction with Type table
+ */
 @Transactional(propagation = Propagation.MANDATORY)
 public interface TypeRepository extends CrudRepository<Type, Long> {
 

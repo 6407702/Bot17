@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Service provides a functional interaction with User table
+ */
 @Service
 @Transactional
 public class UserService {

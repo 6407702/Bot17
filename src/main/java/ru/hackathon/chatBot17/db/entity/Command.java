@@ -2,6 +2,9 @@ package ru.hackathon.chatBot17.db.entity;
 
 import javax.persistence.*;
 
+/**
+ * Entity for mapping the Command table
+ */
 @Entity
 @Table(name = "Command")
 public class Command {

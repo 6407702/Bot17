@@ -3,6 +3,9 @@ package ru.hackathon.chatBot17.db.entity;
 import javax.persistence.*;
 import java.util.Collection;
 
+/**
+ * Entity for mapping the Server table
+ */
 @Entity
 @Table(name = "Server")
 public class Server {

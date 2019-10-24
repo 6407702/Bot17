@@ -7,6 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Interface defining a methods of functional interaction with Command table
+ */
 @Transactional(propagation = Propagation.MANDATORY)
 public interface CommandRepository extends CrudRepository<Command, Long> {
 
