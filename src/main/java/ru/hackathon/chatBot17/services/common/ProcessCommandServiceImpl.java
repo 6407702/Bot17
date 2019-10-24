@@ -1,0 +1,68 @@
+package ru.hackathon.chatBot17.services.common;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.hackathon.chatBot17.common.CommandTypes;
+import ru.hackathon.chatBot17.common.ParsedCommand;
+import ru.hackathon.chatBot17.db.entity.Command;
+import ru.hackathon.chatBot17.services.api.JenkinsService;
+import ru.hackathon.chatBot17.services.api.SshService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Parse and get result of the command
+ */
+@Service
+public class ProcessCommandServiceImpl implements ProcessCommandService {
+
+    @Autowired
+    SshService sshService;
+
+    @Autowired
+    JenkinsService jenkinsService;
+
+    /**
+     * @inheritDoc
+     * */
+    @Override
+    public String processCommand(String command) throws Exception {
+        ParsedCommand parsedCommand = parseMessage(command);
+        switch (parsedCommand.getType()) {
+            case SSH: {
+                return sshService.process(parsedCommand);
+            }
+            case JNK: {
+                return jenkinsService.process(parsedCommand);
+            }
+        }
+        return "incorrect command";
+    }
+
+    /**
+     * Get parsed user command
+     * //TODO: fix parsing!
+     **/
+    private ParsedCommand parseMessage(String msg) {
+        ParsedCommand parsedCommand = new ParsedCommand();
+        Pattern p = Pattern.compile("[a-zA-Z0-9]+");
+        Matcher m1 = p.matcher(msg);
+        //type
+        if (m1.find()) {
+            CommandTypes type = CommandTypes.getTypeByName(m1.group());
+            parsedCommand.setType(type);
+        }
+        //command
+        if (m1.find()) {
+            parsedCommand.setCommand(m1.group());
+        }
+        //arg
+        if (m1.find()) {
+            parsedCommand.setArgument(m1.group());
+        }
+        return parsedCommand;
+    }
+}
