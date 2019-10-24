@@ -22,4 +22,11 @@ public class CodingTest {
         Assert.assertEquals("3cf9fe8acf974b02", codingPassword);
         Assert.assertEquals("password", decodingPassword);
     }
+
+    @Test
+    public void coDecodeTest() {
+        String decodingPassword = codingWordImpl.decoding(codingWordImpl.coding("qweqda"));
+
+        Assert.assertEquals("qweqda", decodingPassword);
+    }
 }

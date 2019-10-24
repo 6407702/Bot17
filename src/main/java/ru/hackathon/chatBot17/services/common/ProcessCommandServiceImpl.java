@@ -1,5 +1,6 @@
 package ru.hackathon.chatBot17.services.common;
 
+import com.google.rpc.Help;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hackathon.chatBot17.common.CommandTypes;
@@ -7,7 +8,7 @@ import ru.hackathon.chatBot17.common.ParsedCommand;
 import ru.hackathon.chatBot17.db.entity.Command;
 import ru.hackathon.chatBot17.services.api.JenkinsService;
 import ru.hackathon.chatBot17.services.api.SshService;
-
+import ru.hackathon.chatBot17.services.api.HelpService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -24,6 +25,8 @@ public class ProcessCommandServiceImpl implements ProcessCommandService {
 
     @Autowired
     JenkinsService jenkinsService;
+    @Autowired
+    HelpService helpService;
 
     /**
      * @inheritDoc
@@ -38,6 +41,10 @@ public class ProcessCommandServiceImpl implements ProcessCommandService {
             case JNK: {
                 return jenkinsService.process(parsedCommand);
             }
+            case HELP: {
+                return helpService.process(parsedCommand);
+            }
+
         }
         return "incorrect command";
     }
