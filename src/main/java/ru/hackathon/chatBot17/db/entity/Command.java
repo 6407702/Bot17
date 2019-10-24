@@ -29,10 +29,11 @@ public class Command {
 
     }
 
-    public Command(String commands, String text, int type) {
+    public Command(String commands, String text, int type, String description) {
         this.commands = commands;
         this.text = text;
         this.type = type;
+        this.description = description;
     }
 
     public long getId() {

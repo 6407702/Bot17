@@ -16,4 +16,10 @@ public class SecurityChecksServiceImpl implements SecurityChecksService {
         //TODO: implement security rules for ssh commands.
         return true;
     }
+
+    @Override
+    public boolean checkJenkinsCommand(String command) {
+        //TODO: implement security rules for jenkins commands.
+        return true;
+    }
 }

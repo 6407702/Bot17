@@ -11,4 +11,11 @@ public interface SecurityChecksService {
      * @return true - ok, false - stop processing
      */
     boolean checkSshCommand(String command);
+
+    /**
+     * Check jenkings command
+     * @param command
+     * @return true - ok, false - stop processing
+     */
+    boolean checkJenkinsCommand(String command);
 }
