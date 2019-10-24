@@ -7,7 +7,9 @@ public enum CommandTypes {
     UNK("unknown", -1),
     SSH("ssh", 1),
     JNK("jenkins",2),
-    GIT("git",3);
+    GIT("git",3),
+    HELP("help",4);
+
 
     private String name;
     private Integer code;
