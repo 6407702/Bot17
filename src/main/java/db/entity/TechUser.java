@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class TechUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tech_user_id;
 
     @Column(name = "logic")

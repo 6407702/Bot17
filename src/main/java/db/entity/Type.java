@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Type {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long type_id;
 
     @Column(name = "types", nullable = false)

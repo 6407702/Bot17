@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Server {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long server_id;
 
     @Column(name = "ip", nullable = false)

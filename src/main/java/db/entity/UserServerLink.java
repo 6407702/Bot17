@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class UserServerLink {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_server_link_id;
 
     @Column(name = "tech_id", nullable = false)
