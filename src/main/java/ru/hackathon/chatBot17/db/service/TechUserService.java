@@ -27,6 +27,10 @@ public class TechUserService {
         return repository.findAll();
     }
 
+    public String find(long id) {
+        return String.valueOf(repository.findById(id));
+    }
+
     public void remove(TechUser selectedTechUser) {
         repository.delete(selectedTechUser);
     }

@@ -25,6 +25,14 @@ public class TechUser {
         this.pass = pass;
     }
 
+    public long getTech_user_id() {
+        return tech_user_id;
+    }
+
+    public void setTech_user_id(long tech_user_id) {
+        this.tech_user_id = tech_user_id;
+    }
+
     public String getLogic() {
         return login;
     }
