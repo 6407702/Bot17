@@ -16,4 +16,11 @@ public class CodingTest {
         Assert.assertEquals("ЮУсZBwxj\fаЁі\txnЎ", codingPassword);
         Assert.assertEquals("password", decodingPassword);
     }
+
+    @Test
+    public void coDecodeTest() {
+        String decodingPassword = codingWordImpl.decoding(codingWordImpl.coding("qweqda"));
+
+        Assert.assertEquals("qweqda", decodingPassword);
+    }
 }
