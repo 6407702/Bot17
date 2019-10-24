@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
+import java.util.Base64;
 
 /**
  * Class for coding a words
  */
 @Service
-public class CodingWordImpl implements CodingWord {
+public class CryptingServiceImpl implements CryptingService {
 
     private static final String CRYPT_ALGORITHM = "DESede";
     private static final String PADDING = "DESede/CBC/NoPadding";
@@ -23,7 +23,7 @@ public class CodingWordImpl implements CodingWord {
     /**
      * Constructor by default for initialize without entry key
      */
-    public CodingWordImpl() {
+    public CryptingServiceImpl() {
     }
 
     /**
@@ -39,15 +39,13 @@ public class CodingWordImpl implements CodingWord {
         }
 
         String retVal = null;
-
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(MY_KEY, CRYPT_ALGORITHM);
             final IvParameterSpec iv = new IvParameterSpec(MY_IV);
             final Cipher cipher = Cipher.getInstance(PADDING);
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, iv);
-            final byte[] encrypted = cipher.doFinal(text.getBytes(CHAR_ENCODING));
+            final byte[] encrypted = cipher.doFinal(Base64.getEncoder().encode(text.getBytes(CHAR_ENCODING)));
             retVal = new String(encodeHex(encrypted));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,14 +66,13 @@ public class CodingWordImpl implements CodingWord {
         }
 
         String retVal = null;
-
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(MY_KEY, CRYPT_ALGORITHM);
             final IvParameterSpec iv = new IvParameterSpec(MY_IV);
             final Cipher cipher = Cipher.getInstance(PADDING);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, iv);
             final byte[] decrypted = cipher.doFinal(decodeHex(text.toCharArray()));
-            retVal = new String(decrypted, CHAR_ENCODING);
+            retVal = new String(Base64.getDecoder().decode(decrypted), CHAR_ENCODING);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -150,8 +147,11 @@ public class CodingWordImpl implements CodingWord {
      *
      * @param data
      *            a byte[] to convert to Hex characters
-     *
+     * @param toDigits
+     *            the output alphabet
      * @return A char[] containing hexadecimal characters
+     *
+     *
      */
     private char[] encodeHex(byte[] data) {
         final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };

@@ -5,12 +5,12 @@ import java.io.UnsupportedEncodingException;
 /**
  * Interface provides of methods for coding/decoding a words
  */
-public interface CodingWord {
+public interface CryptingService {
 
     /**
      * Coding a word
      *
-     * @param word word
+     * @param text word
      * @return coded word
      */
     String encrypt(String text);
@@ -18,7 +18,7 @@ public interface CodingWord {
     /**
      * Decoding a coded word
      *
-     * @param codingWord coded word
+     * @param text coded word
      * @return decoded word
      */
     String decrypt(String text);

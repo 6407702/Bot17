@@ -8,7 +8,7 @@ import ru.hackathon.chatBot17.common.ParsedCommand;
 import ru.hackathon.chatBot17.db.entity.Server;
 import ru.hackathon.chatBot17.db.entity.TechUser;
 import ru.hackathon.chatBot17.db.service.ServerService;
-import ru.hackathon.chatBot17.services.security.CodingWord;
+import ru.hackathon.chatBot17.services.security.CryptingService;
 import ru.hackathon.chatBot17.services.security.SecurityChecksService;
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class SshServerImpl implements SshService {
     ServerService serverService;
 
     @Autowired
-    CodingWord codingWord;
+    CryptingService cryptingService;
 
     @Autowired
     SecurityChecksService securityChecks;
@@ -44,7 +44,7 @@ public class SshServerImpl implements SshService {
             TechUser techUser = server.getTechUser();
             if (techUser != null) {
                 return runCommand(server.getIp(), techUser.getLogin(),
-                                  codingWord.decrypt(techUser.getPass()),
+                                  cryptingService.decrypt(techUser.getPass()),
                                   parsedCommand.getCommand());
             } else {
                 throw new Exception("Server with a code: " + server.getCode() +
