@@ -22,6 +22,9 @@ public class Command {
     @Column(name = "type", nullable = false)
     private int type;
 
+    @Column(name = "description", nullable = false)
+    private String description;
+
     public Command() {
 
     }
@@ -62,5 +65,13 @@ public class Command {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

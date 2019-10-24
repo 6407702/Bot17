@@ -25,7 +25,7 @@ public class HelpServiceImpl implements HelpService {
         StringBuilder sb = new StringBuilder();
         List<Command> list = commandService.findAll();
         for (Command command : list) {
-            sb.append(command.getCommands() + command.getType() + "\n\r");
+            sb.append(command.getCommands() + " - " + command.getDescription() + "\n\r");
         }
         return sb.toString();
     }
