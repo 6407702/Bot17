@@ -30,4 +30,8 @@ public class CommandService {
     public void remove(Command selectedCommand) {
         repository.delete(selectedCommand);
     }
+
+    public void removeAll() {
+        repository.deleteAll();
+    }
 }

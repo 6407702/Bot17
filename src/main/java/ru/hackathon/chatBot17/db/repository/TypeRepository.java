@@ -11,4 +11,5 @@ import java.util.List;
 public interface TypeRepository extends CrudRepository<Type, Long> {
 
     List<Type> findAll();
+    void deleteAll();
 }

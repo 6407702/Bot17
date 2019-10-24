@@ -30,4 +30,8 @@ public class ServerService {
     public void remove(Server selectedServer) {
         repository.delete(selectedServer);
     }
+
+    public void removeAll() {
+        repository.deleteAll();
+    }
 }

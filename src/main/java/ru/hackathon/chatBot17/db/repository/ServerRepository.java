@@ -11,4 +11,5 @@ import java.util.List;
 public interface ServerRepository extends CrudRepository<Server, Long> {
 
     List<Server> findAll();
+    void deleteAll();
 }

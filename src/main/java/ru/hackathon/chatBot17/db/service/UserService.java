@@ -30,4 +30,8 @@ public class UserService {
     public void remove(User selectedUser) {
         repository.delete(selectedUser);
     }
+
+    public void removeAll() {
+        repository.deleteAll();
+    }
 }

@@ -27,8 +27,19 @@ public class FillInTestDataToDB {
     @Autowired
     private TechUserService techUserService;
 
+    private void clearAll() {
+
+        commandService.removeAll();
+        typeService.removeAll();
+        serverService.removeAll();
+        techUserService.removeAll();
+    }
+
     @Test
     public void fillDataIn() {
+
+        clearAll();
+
         //types
         typeService.save(new Type("SSH"));
         typeService.save(new Type("JNK"));

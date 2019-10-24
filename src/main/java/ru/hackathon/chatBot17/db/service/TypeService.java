@@ -30,4 +30,8 @@ public class TypeService {
     public void remove(Type selectedType) {
         repository.delete(selectedType);
     }
+
+    public void removeAll() {
+        repository.deleteAll();
+    }
 }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface TechUserRepository extends CrudRepository<TechUser, Long> {
 
     List<TechUser> findAll();
+    void deleteAll();
 }

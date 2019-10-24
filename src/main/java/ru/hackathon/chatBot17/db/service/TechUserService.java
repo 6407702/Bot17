@@ -30,4 +30,8 @@ public class TechUserService {
     public void remove(TechUser selectedTechUser) {
         repository.delete(selectedTechUser);
     }
+
+    public void removeAll() {
+        repository.deleteAll();
+    }
 }
