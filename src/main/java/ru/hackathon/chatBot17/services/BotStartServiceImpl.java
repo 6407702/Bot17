@@ -5,10 +5,15 @@ import im.dlg.botsdk.BotConfig;
 
 import java.util.concurrent.ExecutionException;
 
-
+/**
+ * Implementation of a service which provides operation connected with Bot API.
+ */
 @Service
 public class BotStartServiceImpl implements BotStartService {
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public void start(String host, Integer port, String token) throws ExecutionException, InterruptedException {
 

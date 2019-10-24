@@ -7,6 +7,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import ru.hackathon.chatBot17.services.BotStartService;
 
+/**
+ * Class launches a ChatBot after application was started.
+ */
 @Component
 public class AppStartupRunner implements ApplicationRunner {
 
