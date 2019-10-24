@@ -1,5 +1,7 @@
 package ru.hackathon.chatBot17.services.security;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Interface provides of methods for coding/decoding a words
  */
@@ -11,7 +13,7 @@ public interface CodingWord {
      * @param word word
      * @return coded word
      */
-    String coding(String word);
+    String encrypt(String text);
 
     /**
      * Decoding a coded word
@@ -19,5 +21,5 @@ public interface CodingWord {
      * @param codingWord coded word
      * @return decoded word
      */
-    String decoding(String codingWord);
+    String decrypt(String text);
 }
