@@ -1,4 +1,4 @@
-package ru.hackathon.chatBot17.services;
+package ru.hackathon.chatBot17.services.bot;
 
 import java.util.concurrent.ExecutionException;
 

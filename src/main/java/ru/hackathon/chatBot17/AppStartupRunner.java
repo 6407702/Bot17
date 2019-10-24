@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import ru.hackathon.chatBot17.services.BotStartService;
+import ru.hackathon.chatBot17.services.bot.BotStartService;
 
 /**
  * Class launches a ChatBot after application was started.

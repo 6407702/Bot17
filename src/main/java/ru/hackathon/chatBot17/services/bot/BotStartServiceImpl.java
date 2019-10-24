@@ -1,4 +1,4 @@
-package ru.hackathon.chatBot17.services;
+package ru.hackathon.chatBot17.services.bot;
 import org.springframework.stereotype.Service;
 import im.dlg.botsdk.Bot;
 import im.dlg.botsdk.BotConfig;
