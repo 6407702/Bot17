@@ -13,6 +13,8 @@ import java.security.spec.InvalidKeySpecException;
 public class CodingWordImpl implements CodingWord {
 
     private byte[] key = "asdaFAF1faasdAsdsd4fQAd1".getBytes();
+    private String nameCipher = "TripleDES";
+    private String nameSpecification = nameCipher + "/ECB/PKCS5Padding";
 
     /**
      * Constructor by default for initialize without entry key
@@ -42,9 +44,9 @@ public class CodingWordImpl implements CodingWord {
 
         try {
             spec = new DESedeKeySpec(key);
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("desede"); //Create secret key using DESede
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(nameCipher); //Create secret key using DESede
             Key desKey = keyFactory.generateSecret(spec); //Generate secret key
-            Cipher cipher = Cipher.getInstance("DESede" + "/ECB/PKCS5Padding"); //Algorithm and encryption method DESede/ECB/PKCS5Padding(168)
+            Cipher cipher = Cipher.getInstance(nameSpecification); //Algorithm and encryption method DESede/ECB/PKCS5Padding(168)
             cipher.init(Cipher.ENCRYPT_MODE, desKey);
             CipherText = cipher.doFinal(data); //Encrypt
         } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException | InvalidKeySpecException e) {
@@ -67,9 +69,9 @@ public class CodingWordImpl implements CodingWord {
 
         try {
             spec = new DESedeKeySpec(key);
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("desede"); //Create secret key using DESede
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance(nameCipher); //Create secret key using DESede
             Key desKey = keyFactory.generateSecret(spec); //Generate secret key
-            Cipher cipher = Cipher.getInstance("DESede" + "/ECB/PKCS5Padding"); //Algorithm and encryption method DESede/ECB/PKCS5Padding(168)
+            Cipher cipher = Cipher.getInstance(nameSpecification); //Algorithm and encryption method DESede/ECB/PKCS5Padding(168)
             cipher.init(Cipher.DECRYPT_MODE, desKey);
             plaintext = cipher.doFinal(CipherText.getBytes()); //Decrypt
         } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException | InvalidKeySpecException e) {
