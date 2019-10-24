@@ -1,22 +1,17 @@
 package ru.hackathon.chatBot17.services.security;
 
 import javax.crypto.*;
-import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.util.Base64;
 
 /**
  * Class for coding a words
  */
 public class CodingWordImpl implements CodingWord {
 
-    private static final String CRYPT_ALGORITHM = "TripleDES";
-    private static final String PADDING = "TripleDES/CBC/NoPadding";
+    private static final String CRYPT_ALGORITHM = "DESede";
+    private static final String PADDING = "DESede/CBC/NoPadding";
     private static final String CHAR_ENCODING = "UTF-8";
 
     private static final byte[] MY_KEY = "5oquil2oo2vb63e8ionujny6".getBytes();//24-byte
@@ -41,15 +36,13 @@ public class CodingWordImpl implements CodingWord {
         }
 
         String retVal = null;
-
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(MY_KEY, CRYPT_ALGORITHM);
             final IvParameterSpec iv = new IvParameterSpec(MY_IV);
             final Cipher cipher = Cipher.getInstance(PADDING);
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, iv);
-            final byte[] encrypted = cipher.doFinal(text.getBytes(CHAR_ENCODING));
+            final byte[] encrypted = cipher.doFinal(Base64.getEncoder().encode(text.getBytes(CHAR_ENCODING)));
             retVal = new String(encodeHex(encrypted));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,14 +63,13 @@ public class CodingWordImpl implements CodingWord {
         }
 
         String retVal = null;
-
         try {
             final SecretKeySpec secretKeySpec = new SecretKeySpec(MY_KEY, CRYPT_ALGORITHM);
             final IvParameterSpec iv = new IvParameterSpec(MY_IV);
             final Cipher cipher = Cipher.getInstance(PADDING);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec, iv);
             final byte[] decrypted = cipher.doFinal(decodeHex(text.toCharArray()));
-            retVal = new String(decrypted, CHAR_ENCODING);
+            retVal = new String(Base64.getDecoder().decode(decrypted), CHAR_ENCODING);
         } catch (Exception e) {
             e.printStackTrace();
         }

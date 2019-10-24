@@ -16,17 +16,11 @@ public class CodingTest {
        /* DesedeCrypter crypter = new DesedeCrypter();
         String codingPassword = crypter.encrypt("password");
         String encrypted = crypter.decrypt(codingPassword);*/
-        String codingPassword = codingWordImpl.encrypt("password");
+        String codingPassword = codingWordImpl.encrypt("11384812b8b48933cdf7b388d973944b66"); //
         String decodingPassword = codingWordImpl.decrypt(codingPassword);
 
         Assert.assertEquals("3cf9fe8acf974b02", codingPassword);
         Assert.assertEquals("password", decodingPassword);
     }
 
-    @Test
-    public void coDecodeTest() {
-        String decodingPassword = codingWordImpl.decoding(codingWordImpl.coding("qweqda"));
-
-        Assert.assertEquals("qweqda", decodingPassword);
-    }
 }
