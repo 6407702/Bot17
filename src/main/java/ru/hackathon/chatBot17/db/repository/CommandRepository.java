@@ -14,5 +14,6 @@ import java.util.List;
 public interface CommandRepository extends CrudRepository<Command, Long> {
 
     List<Command> findAll();
+
     void deleteAll();
 }

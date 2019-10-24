@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  * Class provides security policy for checking commands
  */
 @Service
-public class SecurityChecksImpl implements SecurityChecks {
+public class SecurityChecksServiceImpl implements SecurityChecksService {
 
     /**
      * @inheritDoc

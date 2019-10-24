@@ -8,10 +8,8 @@ import ru.hackathon.chatBot17.common.ParsedCommand;
 import ru.hackathon.chatBot17.db.entity.Server;
 import ru.hackathon.chatBot17.db.entity.TechUser;
 import ru.hackathon.chatBot17.db.service.ServerService;
-import ru.hackathon.chatBot17.services.security.SecurityChecks;
-import ru.hackathon.chatBot17.services.security.SecurityChecksImpl;
-
-import java.util.List;
+import ru.hackathon.chatBot17.services.security.CodingWord;
+import ru.hackathon.chatBot17.services.security.SecurityChecksService;
 import java.util.Scanner;
 
 /**
@@ -24,7 +22,10 @@ public class SshServerImpl implements SshService {
     ServerService serverService;
 
     @Autowired
-    private SecurityChecks securityChecks = new SecurityChecksImpl();
+    CodingWord codingWord;
+
+    @Autowired
+    SecurityChecksService securityChecks;
 
     /**
      * @inheritDoc
@@ -42,11 +43,13 @@ public class SshServerImpl implements SshService {
             //[2] run command
             TechUser techUser = server.getTechUser();
             if (techUser != null) {
-                return runCommand(server.getIp(), techUser.getLogin(), techUser.getPass(), parsedCommand.getCommand());
+                return runCommand(server.getIp(), techUser.getLogin(),
+                                  codingWord.decrypt(techUser.getPass()),
+                                  parsedCommand.getCommand());
             } else {
                 throw new Exception("Server with a code: " + server.getCode() +
                                     " does not have a default tech user. " +
-                                    " Contact the Administrator to do it.");
+                                    " Contact with the Administrator to do it.");
             }
         } else {
             return "Server code '" + parsedCommand.getArgument() + "' is not registered. " +

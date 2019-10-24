@@ -1,22 +1,20 @@
 package ru.hackathon.chatBot17.services.security;
 
+import org.springframework.stereotype.Service;
+
 import javax.crypto.*;
-import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+
 
 /**
  * Class for coding a words
  */
+@Service
 public class CodingWordImpl implements CodingWord {
 
-    private static final String CRYPT_ALGORITHM = "TripleDES";
-    private static final String PADDING = "TripleDES/CBC/NoPadding";
+    private static final String CRYPT_ALGORITHM = "DESede";
+    private static final String PADDING = "DESede/CBC/NoPadding";
     private static final String CHAR_ENCODING = "UTF-8";
 
     private static final byte[] MY_KEY = "5oquil2oo2vb63e8ionujny6".getBytes();//24-byte
@@ -152,11 +150,8 @@ public class CodingWordImpl implements CodingWord {
      *
      * @param data
      *            a byte[] to convert to Hex characters
-     * @param toDigits
-     *            the output alphabet
+     *
      * @return A char[] containing hexadecimal characters
-     *
-     *
      */
     private char[] encodeHex(byte[] data) {
         final char[] DIGITS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
