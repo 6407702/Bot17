@@ -11,7 +11,7 @@ public class HelpServiceImpl implements HelpService{
 
         @Override
         public String  process(ParsedCommand parsedCommand) throws Exception {
-                String result=null;
+                String result="";
                 for (CommandTypes env : CommandTypes.values()) {
                         result=result + " "+ (env.getName());
                 }
