@@ -1,6 +1,7 @@
 package db.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "TechUser")
@@ -15,6 +16,9 @@ public class TechUser {
 
     @Column(name = "pass")
     private String pass;
+
+    @OneToMany(mappedBy = "tech_user_id")
+    private Collection<Server> servers;
 
     public TechUser(String logic, String pass) {
         this.logic = logic;

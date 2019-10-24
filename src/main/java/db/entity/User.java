@@ -1,6 +1,7 @@
 package db.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "User")
@@ -12,6 +13,9 @@ public class User {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ManyToMany(mappedBy = "users")
+    private Collection<Server> servers;
 
     public User(String name) {
         this.name = name;

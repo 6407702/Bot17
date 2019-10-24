@@ -1,6 +1,7 @@
 package db.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "Server")
@@ -16,13 +17,20 @@ public class Server {
     @Column(name = "port", nullable = false)
     private String port;
 
-    @Column(name = "tech_user_id", nullable = false)
-    private int tech_user_id;
+    @ManyToOne
+    @JoinColumn(name = "tech_user_id", nullable = false)
+    private TechUser tech_user_id;
 
     @Column(name = "code")
     private String code;
 
-    public Server(String ip, String port, int tech_user_id, String code) {
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_SERVER_LINK",
+            joinColumns = @JoinColumn(name = "server_id", referencedColumnName = "server_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"))
+    private Collection<User> users;
+
+    public Server(String ip, String port, TechUser tech_user_id, String code) {
         this.ip = ip;
         this.port = port;
         this.tech_user_id = tech_user_id;
@@ -53,11 +61,11 @@ public class Server {
         this.port = port;
     }
 
-    public int getTech_user_id() {
+    public TechUser getTech_user_id() {
         return tech_user_id;
     }
 
-    public void setTech_user_id(int tech_user_id) {
+    public void setTech_user_id(TechUser tech_user_id) {
         this.tech_user_id = tech_user_id;
     }
 
