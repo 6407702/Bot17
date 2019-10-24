@@ -1,19 +1,21 @@
+package ru.hackathon.chatBot17.services;
+import org.springframework.stereotype.Service;
 import im.dlg.botsdk.Bot;
 import im.dlg.botsdk.BotConfig;
 
 import java.util.concurrent.ExecutionException;
 
-public class Main {
-    private static final String TOKEN_BOT17 = "fd38fb9c803481ff18e242a1bc57a3d997c64ea3";
-    private static final String HOST = "hackathon-mob.transmit.im";
-    private static final int PORT = 443;
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
+@Service
+public class BotStartServiceImpl implements BotStartService {
+
+    @Override
+    public void start(String host, Integer port, String token) throws ExecutionException, InterruptedException {
 
         BotConfig botConfig = BotConfig.Builder.aBotConfig()
-                .withHost(HOST)
-                .withPort(PORT)
-                .withToken(TOKEN_BOT17)
+                .withHost(host)
+                .withPort(port)
+                .withToken(token)
                 .build();
 
         Bot bot = Bot.start(botConfig).get();
