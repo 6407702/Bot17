@@ -10,9 +10,9 @@ import ru.hackathon.chatBot17.services.api.SshService;
 public class ChatBot17ApplicationTests {
 
 	@Test
-	public void testSshCommand() {
+	public void testSshCommandUptime() throws Exception {
 		SshService sshService = new SshServerImpl();
-		String result = sshService.runCommand("62.109.7.2", "bot", "k2mFa7pi", "uptime");
+		String result = sshService.runCommand("62.109.7.2", "bot", "", "uptime");
 		System.out.println(result);
 
 		Assert.assertNotNull(result);

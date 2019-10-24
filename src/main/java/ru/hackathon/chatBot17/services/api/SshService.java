@@ -1,5 +1,7 @@
 package ru.hackathon.chatBot17.services.api;
 
+import java.io.IOException;
+
 /**
  * Service provides operation with SSL connection
  */
@@ -12,5 +14,5 @@ public interface SshService {
      * @param command text of a command
      * @return result of the command or error text
      * */
-    String runCommand(String serverIp, String login, String pass, String command);
+    String runCommand(String serverIp, String login, String pass, String command) throws Exception;
 }
