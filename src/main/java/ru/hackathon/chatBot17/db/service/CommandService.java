@@ -37,4 +37,8 @@ public class CommandService {
     public void removeAll() {
         repository.deleteAll();
     }
+
+    public Command findByText(String text) {
+        return repository.findByText(text);
+    }
 }

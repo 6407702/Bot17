@@ -8,7 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
 
 /**
- * Class for coding a words
+ * Class for coding a words.
+ * TODO: use ssl-certificates for connection by ssh.
  */
 @Service
 public class CryptingServiceImpl implements CryptingService {

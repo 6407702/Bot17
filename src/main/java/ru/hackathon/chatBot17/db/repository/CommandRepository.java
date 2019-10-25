@@ -16,4 +16,6 @@ public interface CommandRepository extends CrudRepository<Command, Long> {
     List<Command> findAll();
 
     void deleteAll();
+
+    Command findByText(String text);
 }

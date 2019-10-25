@@ -46,7 +46,14 @@ public class FillInTestDataToDB {
         typeService.save(new Type("GIT"));
 
         //commands
-        commandService.save(new Command("uptime", "uptime", 1));
+        commandService.save(new Command("uptime", "uptime",
+                1, "Получить время работы сервера: /ssh uptime <код сервера>"));
+
+        commandService.save(new Command("pwd", "pwd",
+                1, "Получить текущую директорию: /ssh uptime <код сервера>"));
+
+        commandService.save(new Command("help", "help",
+                4, "help - Вывести информацию о возможных командах: /help"));
 
         //tech user
         TechUser techUser = new TechUser("bot", "");

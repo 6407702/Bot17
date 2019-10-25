@@ -39,12 +39,12 @@ public class BotStartServiceImpl implements BotStartService {
                 bot.users().get(message.getSender()
                 ).thenAccept(userOpt -> userOpt.ifPresent(user -> {
                     //[0] process a user message
-                            try {
-                                answer.set(processCommand.processCommand(message.getText()));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            System.out.println("Got a message: " + message.getText() + " from user: " + user.getName());
+                    try {
+                        answer.set(processCommand.processCommand(message.getText()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Got a message: " + message.getText() + " from user: " + user.getName());
                 })
                 ).thenCompose(aVoid -> {
                     //[1] send response to User
@@ -61,6 +61,4 @@ public class BotStartServiceImpl implements BotStartService {
 
         bot.await();
     }
-
-
 }

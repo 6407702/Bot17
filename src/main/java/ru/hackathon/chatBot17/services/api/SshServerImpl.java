@@ -5,8 +5,10 @@ import ch.ethz.ssh2.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hackathon.chatBot17.common.ParsedCommand;
+import ru.hackathon.chatBot17.db.entity.Command;
 import ru.hackathon.chatBot17.db.entity.Server;
 import ru.hackathon.chatBot17.db.entity.TechUser;
+import ru.hackathon.chatBot17.db.service.CommandService;
 import ru.hackathon.chatBot17.db.service.ServerService;
 import ru.hackathon.chatBot17.services.security.CryptingService;
 import ru.hackathon.chatBot17.services.security.SecurityChecksService;
@@ -17,6 +19,9 @@ import java.util.Scanner;
  */
 @Service
 public class SshServerImpl implements SshService {
+
+    @Autowired
+    CommandService commandService;
 
     @Autowired
     ServerService serverService;
@@ -37,12 +42,22 @@ public class SshServerImpl implements SshService {
             return "Command '" + parsedCommand.getCommand() + "' will not be run because of security rules.";
         }
 
-        //[1] find server
+        //[1] check command exist
+        Command command = commandService.findByText(parsedCommand.getCommand());
+        if (command == null) {
+            return "Command '" + parsedCommand.getCommand() + "' is not registered. " +
+                   "Please, contact your Administrator tp fix it.";
+        }
+
+        //[2] find server
         Server server = serverService.findByCode(parsedCommand.getArgument().toUpperCase());
         if (server != null) {
-            //[2] run command
+            //[3] run command
             TechUser techUser = server.getTechUser();
             if (techUser != null) {
+                //TODO: use ssl-certificates for connection by ssh.
+                //TODO: install it on the remote servers and on host server for chat-bot.
+                //TODO: crypting password is not a reliable decision.
                 return runCommand(server.getIp(), techUser.getLogin(),
                                   cryptingService.decrypt(techUser.getPass()),
                                   parsedCommand.getCommand());
@@ -53,7 +68,7 @@ public class SshServerImpl implements SshService {
             }
         } else {
             return "Server code '" + parsedCommand.getArgument() + "' is not registered. " +
-                   "Please, contact with your Administrator. ";
+                   "Please, contact your Administrator to fix it. ";
         }
     }
 

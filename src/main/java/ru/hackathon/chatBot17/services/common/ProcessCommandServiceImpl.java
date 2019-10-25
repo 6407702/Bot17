@@ -44,6 +44,9 @@ public class ProcessCommandServiceImpl implements ProcessCommandService {
             case HELP: {
                 return helpService.process(parsedCommand);
             }
+            case GIT: {
+                return "Processing GIT commands will be implemented later. Sorry for inconvenience.";
+            }
 
         }
         return "incorrect command";
