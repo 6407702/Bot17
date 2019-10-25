@@ -17,6 +17,9 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "roleId", nullable = false)
+    private Integer roleId;
+
     @ManyToMany(mappedBy = "users")
     private Collection<Server> servers;
 
@@ -24,8 +27,9 @@ public class User {
 
     }
 
-    public User(String name) {
+    public User(String name, Integer roleId) {
         this.name = name;
+        this.roleId = roleId;
     }
 
     public long getUser_id() {
@@ -42,5 +46,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

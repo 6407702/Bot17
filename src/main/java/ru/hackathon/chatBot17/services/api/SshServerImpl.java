@@ -8,6 +8,7 @@ import ru.hackathon.chatBot17.common.ParsedCommand;
 import ru.hackathon.chatBot17.db.entity.Command;
 import ru.hackathon.chatBot17.db.entity.Server;
 import ru.hackathon.chatBot17.db.entity.TechUser;
+import ru.hackathon.chatBot17.db.entity.User;
 import ru.hackathon.chatBot17.db.service.CommandService;
 import ru.hackathon.chatBot17.db.service.ServerService;
 import ru.hackathon.chatBot17.services.security.CryptingService;
@@ -36,9 +37,13 @@ public class SshServerImpl implements SshService {
      * @inheritDoc
      */
     @Override
-    public String process(ParsedCommand parsedCommand) throws Exception {
-        //[0] check
-        if (!securityChecks.checkSshCommand(parsedCommand.getCommand())) {
+    public String process(ParsedCommand parsedCommand, User user) throws Exception {
+        //[0] checks
+        if (!securityChecks.checkSshCommandUserRights(user, parsedCommand.getCommand())) {
+            return "Insufficient privilege for running '" + parsedCommand.getCommand() + "'.";
+        }
+
+        if (!securityChecks.checkSshCommandInjection(parsedCommand.getCommand())) {
             return "Command '" + parsedCommand.getCommand() + "' will not be run because of security rules.";
         }
 

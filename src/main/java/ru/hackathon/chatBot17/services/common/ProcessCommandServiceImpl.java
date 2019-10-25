@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.hackathon.chatBot17.common.CommandTypes;
 import ru.hackathon.chatBot17.common.ParsedCommand;
 import ru.hackathon.chatBot17.db.entity.Command;
+import ru.hackathon.chatBot17.db.entity.User;
 import ru.hackathon.chatBot17.services.api.JenkinsService;
 import ru.hackathon.chatBot17.services.api.SshService;
 import ru.hackathon.chatBot17.services.api.HelpService;
@@ -32,11 +33,11 @@ public class ProcessCommandServiceImpl implements ProcessCommandService {
      * @inheritDoc
      * */
     @Override
-    public String processCommand(String command) throws Exception {
+    public String processCommand(String command, User user) throws Exception {
         ParsedCommand parsedCommand = parseMessage(command);
         switch (parsedCommand.getType()) {
             case SSH: {
-                return sshService.process(parsedCommand);
+                return sshService.process(parsedCommand, user);
             }
             case JNK: {
                 return jenkinsService.process(parsedCommand);

@@ -37,4 +37,8 @@ public class UserService {
     public void removeAll() {
         repository.deleteAll();
     }
+
+    public User getByName(String name) {
+        return repository.getByName(name);
+    }
 }

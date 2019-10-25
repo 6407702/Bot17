@@ -3,14 +3,9 @@ package ru.hackathon.chatBot17;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.hackathon.chatBot17.db.entity.Command;
-import ru.hackathon.chatBot17.db.entity.Server;
-import ru.hackathon.chatBot17.db.entity.TechUser;
-import ru.hackathon.chatBot17.db.entity.Type;
-import ru.hackathon.chatBot17.db.service.CommandService;
-import ru.hackathon.chatBot17.db.service.ServerService;
-import ru.hackathon.chatBot17.db.service.TechUserService;
-import ru.hackathon.chatBot17.db.service.TypeService;
+import ru.hackathon.chatBot17.common.UserRoles;
+import ru.hackathon.chatBot17.db.entity.*;
+import ru.hackathon.chatBot17.db.service.*;
 
 @SpringBootTest
 public class FillInTestDataToDB {
@@ -27,6 +22,9 @@ public class FillInTestDataToDB {
     @Autowired
     private TechUserService techUserService;
 
+    @Autowired
+    private UserService userService;
+
     private void clearAll() {
 
         commandService.removeAll();
@@ -39,6 +37,8 @@ public class FillInTestDataToDB {
     public void fillDataIn() {
 
         clearAll();
+
+        userService.save(new User("Alex", UserRoles.USER.getCode()));
 
         //types
         typeService.save(new Type("SSH"));

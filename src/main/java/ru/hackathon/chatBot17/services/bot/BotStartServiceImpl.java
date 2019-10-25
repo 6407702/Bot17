@@ -3,6 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import im.dlg.botsdk.Bot;
 import im.dlg.botsdk.BotConfig;
+import ru.hackathon.chatBot17.db.entity.User;
+import ru.hackathon.chatBot17.db.service.UserService;
 import ru.hackathon.chatBot17.services.common.ProcessCommandService;
 
 import java.util.concurrent.ExecutionException;
@@ -13,6 +15,9 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Service
 public class BotStartServiceImpl implements BotStartService {
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private ProcessCommandService processCommand;
@@ -40,7 +45,8 @@ public class BotStartServiceImpl implements BotStartService {
                 ).thenAccept(userOpt -> userOpt.ifPresent(user -> {
                     //[0] process a user message
                     try {
-                        answer.set(processCommand.processCommand(message.getText()));
+                        User userEntity =userService.getByName(user.getName());
+                        answer.set(processCommand.processCommand(message.getText(), userEntity));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
